@@ -1,0 +1,40 @@
+﻿
+ @model List<Bulk_Email_Sending_Groupwise.Models.Employee>
+
+<div class="container mt-5">
+    <h2 class="mb-4">All Employees List</h2>
+
+    <form asp-controller="DetailsEmp" asp-action="AddEmployee" method="post">
+        <input type="hidden" name="Dept_Id" value="@ViewData["Dept_Id"]" />
+
+        <div class="row">
+            @foreach (var employee in Model)
+            {
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="selectedEmployees" value="@employee.Emp_ID" id="employee_@employee.Emp_ID" />
+                                <label class="form-check-label" for="employee_@employee.Emp_ID">
+                                    <strong>@employee.FirstName @employee.LastName</strong>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="mt-3">
+            <button type="submit" onclick="onsuccessClick()" class="btn btn-primary">Add Selected Employees</button>
+        </div>
+        <div>
+            <a asp-controller="Department" asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </div>
+    </form>
+</div>
+<script>
+    function onsuccessClick() { 
+        alert("Add Employee Successfully in Department");
+    }
+</script>

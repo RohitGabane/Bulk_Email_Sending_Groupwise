@@ -1,0 +1,58 @@
+﻿
+ 
+ @model Bulk_Email_Sending_Groupwise.Models.Employee
+
+<div class="container mt-5">
+    <h1>Delete Employee</h1>
+
+    <hr />
+
+    <div>
+        <h4>Employee Details</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.BirthDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.BirthDate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Email_ID)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Email_ID)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Emp_ID" />
+            <input type="submit" onclick="onsuccessclick()" value="Delete" class="btn btn-danger" /> |
+            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </form>
+    </div>
+</div>
+
+<style>
+    .mt-5 {
+        margin-top: 5rem;
+    }
+</style>
+<script>
+    function onsuccessclick()
+    {
+        alert("delete successfully");
+    }
+</script>

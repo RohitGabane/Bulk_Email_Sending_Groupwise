@@ -1,0 +1,91 @@
+﻿@* @model IEnumerable<Bulk_Email_Sending_Groupwise.Models.Department>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Dept_Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dept_Name)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dept_Id)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dept_Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Dept_Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Dept_Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Dept_Id">Delete</a>|
+                <a asp-controller="DetailsEmp" asp-action="ViewEmployees" asp-route-Dept_Id="@item.Dept_Id">ViewEmployees</a>|
+                <a asp-controller="DetailsEmp" asp-action="ShowAllEmployees" asp-route-Dept_Id="@item.Dept_Id">AddEmployees</a>
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+ *@
+ @model IEnumerable<Bulk_Email_Sending_Groupwise.Models.Department>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container mt-5">
+    <h1>Department Index</h1>
+
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Create New</a>
+    </p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Dept_Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Dept_Name)
+                </th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Dept_Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Dept_Name)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Dept_Id" class="btn btn-secondary">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Dept_Id" class="btn btn-danger">Delete</a> |
+                        <a asp-controller="DetailsEmp" asp-action="ViewEmployees" asp-route-Dept_Id="@item.Dept_Id" class="btn btn-primary">View Employees</a> |
+                        <a asp-controller="DetailsEmp" asp-action="ShowAllEmployees" asp-route-Dept_Id="@item.Dept_Id" class="btn btn-success">Add Employees</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

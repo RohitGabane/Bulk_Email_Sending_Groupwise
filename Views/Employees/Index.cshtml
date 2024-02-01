@@ -1,0 +1,104 @@
+﻿@* @model IEnumerable<Bulk_Email_Sending_Groupwise.Models.Employee>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Emp_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BirthDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email_ID)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Emp_ID)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BirthDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email_ID)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Emp_ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Emp_ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Emp_ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+ *@
+ @model IEnumerable<Bulk_Email_Sending_Groupwise.Models.Employee>
+
+<div class="container mt-5">
+    <h1>Employee Index</h1>
+
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Create New</a>
+    </p>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Emp_ID)</th>
+                <th>@Html.DisplayNameFor(model => model.FirstName)</th>
+                <th>@Html.DisplayNameFor(model => model.LastName)</th>
+                <th>@Html.DisplayNameFor(model => model.BirthDate)</th>
+                <th>@Html.DisplayNameFor(model => model.Email_ID)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Emp_ID)</td>
+                    <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.BirthDate)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Email_ID)</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Emp_ID" class="btn btn-warning">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Emp_ID" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .mt-5 {
+        margin-top: 5rem;
+    }
+</style>

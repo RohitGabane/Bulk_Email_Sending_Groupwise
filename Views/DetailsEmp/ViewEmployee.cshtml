@@ -1,0 +1,32 @@
+﻿
+ @model IEnumerable<Bulk_Email_Sending_Groupwise.Models.Employee>
+
+<div class="container mt-5">
+    <h2>All Employees in Department</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>BirthDate</th>
+                <th>Email_ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var employee in Model)
+            {
+                <tr>
+                    <td>@employee.FirstName</td>
+                    <td>@employee.LastName</td>
+                    <td>@employee.BirthDate.ToShortDateString()</td>
+                    <td>@employee.Email_ID</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div>
+        <a asp-controller="Department" asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>
