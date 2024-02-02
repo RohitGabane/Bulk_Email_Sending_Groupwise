@@ -9,7 +9,7 @@ namespace Bulk_Email_Sending_Groupwise.Models
 
         [Required(ErrorMessage = "Dept_Name is required")]
         [StringLength(15, ErrorMessage = "Dept_Name cannot exceed 15 characters.")]
-        public string Dept_Name { get; set; }
+        public string? Dept_Name { get; set; }
 
         public ICollection<DetailsEmp> DetailsEmp { get; set; } = new List<DetailsEmp>();
     }

@@ -57,7 +57,9 @@
         <thead>
             <tr>
                 <th>@Html.DisplayNameFor(model => model.Emp_ID)</th>
-                <th>@Html.DisplayNameFor(model => model.Employee)</th>
+                <th>@Html.DisplayNameFor(model => model.Employee.FirstName)</th>
+
+                <th>@Html.DisplayNameFor(model => model.Employee.Email_ID)</th>
                 <th>@Html.DisplayNameFor(model => model.Dept_Id)</th>
                 <th>@Html.DisplayNameFor(model => model.Department)</th>
                 <th>Actions</th>
@@ -68,6 +70,7 @@
             {
                 <tr>
                     <td>@Html.DisplayFor(modelItem => item.Employee.Emp_ID)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Employee.FirstName)</td>
                     <td>@Html.DisplayFor(modelItem => item.Employee.Email_ID)</td>
                     <td>@Html.DisplayFor(modelItem => item.Department.Dept_Id)</td>
                     <td>@Html.DisplayFor(modelItem => item.Department.Dept_Name)</td>

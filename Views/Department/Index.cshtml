@@ -82,7 +82,9 @@
                         <a asp-action="Edit" asp-route-id="@item.Dept_Id" class="btn btn-secondary">Edit</a> |
                         <a asp-action="Delete" asp-route-id="@item.Dept_Id" class="btn btn-danger">Delete</a> |
                         <a asp-controller="DetailsEmp" asp-action="ViewEmployees" asp-route-Dept_Id="@item.Dept_Id" class="btn btn-primary">View Employees</a> |
-                        <a asp-controller="DetailsEmp" asp-action="ShowAllEmployees" asp-route-Dept_Id="@item.Dept_Id" class="btn btn-success">Add Employees</a>
+                        <a asp-controller="DetailsEmp" asp-action="ShowAllEmployees" asp-route-Dept_Id="@item.Dept_Id" class="btn btn-success">Add Employees</a>|
+                        <a asp-action="sendEmailToEmployee" asp-route-id="@item.Dept_Id" class="btn btn-success">Send Emails</a>
+
                     </td>
                 </tr>
             }

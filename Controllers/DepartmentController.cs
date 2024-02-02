@@ -13,6 +13,7 @@ namespace Bulk_Email_Sending_Groupwise.Controllers
     {
         private readonly BulkDbContext _context;
 
+
         public DepartmentController(BulkDbContext context)
         {
             _context = context;
@@ -152,5 +153,8 @@ namespace Bulk_Email_Sending_Groupwise.Controllers
         {
             return _context.Department.Any(e => e.Dept_Id == id);
         }
+
+
+
     }
 }

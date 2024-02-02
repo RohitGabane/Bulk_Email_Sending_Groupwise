@@ -50,28 +50,43 @@ namespace Bulk_Email_Sending_Groupwise.Controllers
         {
             return _context.DetailsEmp.Any(e => e.Id == id);
         }
+        
         public async Task<IActionResult> ShowAllEmployees(int Dept_Id)
         {
             ViewData["Dept_Id"] = Dept_Id;
 
+            // Get the department including associated employees
+            var department = await _context.Department
+                .Include(d => d.DetailsEmp)
+                .FirstOrDefaultAsync(m => m.Dept_Id == Dept_Id);
+
+            // Get all employees
             var allEmployees = await _context.Employee.ToListAsync();
 
-            return View(allEmployees);
+            // Exclude employees already associated with the department
+            var employeesToShow = allEmployees.Where(emp => !department.DetailsEmp.Any(de => de.Emp_ID == emp.Emp_ID)).ToList();
+
+            return View(employeesToShow);
         }
 
-
-        // Inside DetailsEmpController.cs
         [HttpPost]
         public async Task<IActionResult> AddEmployee(int Dept_Id, List<int> selectedEmployees)
         {
-            var department = await _context.Department.Include(d => d.DetailsEmp).FirstOrDefaultAsync(m => m.Dept_Id == Dept_Id);
+            var department = await _context.Department
+                .Include(d => d.DetailsEmp)
+                .FirstOrDefaultAsync(m => m.Dept_Id == Dept_Id);
 
             if (department != null && selectedEmployees != null && selectedEmployees.Any())
             {
                 foreach (var empId in selectedEmployees)
                 {
-                    var detailsEmp = new DetailsEmp { Emp_ID = empId, Dept_Id = Dept_Id };
-                    _context.DetailsEmp.Add(detailsEmp);
+                    var existingAssociation = department.DetailsEmp.Any(de => de.Emp_ID == empId);
+
+                    if (!existingAssociation)
+                    {
+                        var detailsEmp = new DetailsEmp { Emp_ID = empId, Dept_Id = Dept_Id };
+                        _context.DetailsEmp.Add(detailsEmp);
+                    }
                 }
 
                 await _context.SaveChangesAsync();
@@ -79,6 +94,7 @@ namespace Bulk_Email_Sending_Groupwise.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
 
 
         public async Task<IActionResult> ViewEmployees(int Dept_Id)
@@ -101,46 +117,6 @@ namespace Bulk_Email_Sending_Groupwise.Controllers
 
             return View("ViewEmployee", employeesInDepartment);
         }
-
-
-
-
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var detailsEmp = await _context.DetailsEmp
-        //        .Include(de => de.Employee)
-        //        .Include(de => de.Department)
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-
-        //    if (detailsEmp == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(detailsEmp);
-        //}
-
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-        //{
-        //    var detailsEmp = await _context.DetailsEmp.FindAsync(id);
-
-        //    if (detailsEmp == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    _context.DetailsEmp.Remove(detailsEmp);
-        //    await _context.SaveChangesAsync();
-
-        //    return RedirectToAction(nameof(Index));
-        //}
 
     }
 }
